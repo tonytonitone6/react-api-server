@@ -1,0 +1,35 @@
+{
+  "name": "react-api-server",
+  "version": "1.0.0",
+  "description": "api-server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tonytonitone6/react-api-server.git"
+  },
+  "author": "mao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tonytonitone6/react-api-server/issues"
+  },
+  "homepage": "https://github.com/tonytonitone6/react-api-server#readme",
+  "dependencies": {
+    "app-root-path": "^2.1.0",
+    "bcrypt": "^3.0.3",
+    "dotenv": "^6.2.0",
+    "jsonwebtoken": "^8.4.0",
+    "koa": "^2.6.2",
+    "koa-body-parser": "^1.1.2",
+    "koa-logger": "^3.2.0",
+    "koa-passport": "^4.1.1",
+    "koa-router": "^7.4.0",
+    "lodash": "^4.17.11",
+    "moment": "^2.23.0",
+    "mongoose": "^5.4.4",
+    "passport-local": "^1.0.0",
+    "winston": "^3.1.0"
+  }
+}
