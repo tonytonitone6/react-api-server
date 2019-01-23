@@ -2,7 +2,6 @@ const root = require('app-root-path').path;
 const { transports, format, createLogger } = require('winston');
 const { join } = require('path');
 
-
 const logger = createLogger({
   levels: {
     error: 0,

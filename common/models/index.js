@@ -26,15 +26,18 @@ module.exports = {
         .on('disconnected', () => {
           logger.error('Disconnected from DB')
         })
-        .once('open', () => {
+        .once('open', function() {
           logger.info('Connection to Mongoose was successful!');
           try {
-            fs.readFileSync(dir)
-              .filter(file => path.extname(file) === '.js')
+            fs.readdirSync(dir)
+              .filter(file => {
+                return path.extname(file) === '.js';
+              })
               .forEach(file => {
                 require(path.join(dir, file));
                 logger.info(`Loading model ${file.split('.')[0]}`);
-              })
+              });
+              resolve();
           } catch (error) {
             logger.error(error);
             reject(error);

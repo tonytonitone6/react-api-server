@@ -1,0 +1,7 @@
+{
+  "401": "Authentication is required!",
+  "404": "Not found",
+  "422": "Missing parameter",
+  "450": "Account is exist"
+}
+
