@@ -7,7 +7,11 @@ const Account = models.get('Account');
 module.exports = {
   create: async (ctx) => {
     const { email, password } = ctx.request.body;
-    const createField = { email, password };
+    
+    const createField = { 
+      email, 
+      password 
+    };
     const user = await Account.findOne({email: email}, {}).lean();
     
     if (user) {
