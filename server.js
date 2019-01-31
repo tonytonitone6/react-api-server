@@ -3,18 +3,21 @@ const app = new Koa();
 const bodyParser = require('koa-body-parser');
 const koaLogger = require('koa-logger');
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3001;
 const models = require('./common/models');
 const logger = require('./common/services/logger');
 
 app.use(bodyParser());
 app.use(koaLogger());
 
+
 models.init()
   .then(() => {
     const router = require('./routes');
     app.use(router.routes()).use(router.allowedMethods());
   });
+
+
 
 app.use(async (ctx, next) => {
   try {
@@ -26,4 +29,7 @@ app.use(async (ctx, next) => {
   }
 });
 
-app.listen(PORT, () => console.log(`server start,  port is ${PORT}`));
+
+const server = app.listen(PORT, () => console.log(`server start,  port is ${PORT}`));
+
+module.exports = server;

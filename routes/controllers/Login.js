@@ -6,12 +6,15 @@ const Account = models.get('Account');
 
 module.exports = {
   create: async (ctx) => {
-    const { email, password } = ctx.request.body;
+    const { email, password, name } = ctx.request.body;
+    console.log(ctx.request.body);
     
-    const createField = { 
+    const createField = {
+      name, 
       email, 
       password 
     };
+    
     const user = await Account.findOne({email: email}, {}).lean();
     
     if (user) {
