@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
-const _ = require('lodash');
-const moment = require('moment');
-const bcrypt = require('bcrypt');
+import * as mongoose from 'mongoose';
+import _ from 'lodash';
+import * as moment from 'moment';
+import bcrypt from 'bcrypt';
 const { Schema } = mongoose;
 
 
@@ -45,4 +45,4 @@ schema.methods.comparePassword = (password, userPassword) => {
 
 const model = mongoose.model('Account', schema, 'accounts');
 
-module.exports = model;
+export default model;

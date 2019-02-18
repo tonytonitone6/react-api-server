@@ -1,6 +1,9 @@
-const root = require('app-root-path').path;
-const { transports, format, createLogger } = require('winston');
-const { join } = require('path');
+import {
+  transports,
+  format,
+  createLogger
+} from 'winston';
+import * as path from 'path';
 
 const logger = createLogger({
   levels: {
@@ -19,10 +22,10 @@ const logger = createLogger({
     format.printf(info => `[${info.timestamp}] ${info.level} ${info.message}`)
   ),
   transports: [
-    new transports.File({ filename: join(`${root}/logs`, 'error.log'), level: 'error'}),
-    new transports.File({ filename: join(`${root}/logs`, 'mongo.log') }),
+    new transports.File({ filename: path.join('src', 'error.log'), level: 'error'}),
+    new transports.File({ filename: path.join('src', 'mongo.log') }),
     new transports.Console()
   ]
 });
 
-module.exports = logger;
+export default logger;

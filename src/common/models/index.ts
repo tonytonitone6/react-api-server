@@ -29,7 +29,7 @@ export default {
           try {
             fs.readdirSync(dir)
               .filter(file => {
-                return path.extname(file) === '.js';
+                return path.extname(file) === '.ts';
               })
               .forEach(file => {
                 require(path.join(dir, file));

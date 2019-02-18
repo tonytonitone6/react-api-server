@@ -1,6 +1,7 @@
-const Joi = require('joi');
+import * as Joi from 'joi';
+import * as dotenv from "dotenv";
 
-require('dotenv').config();
+dotenv.config();
 
 const envVarsSchema = Joi.object({
   NODE_ENV: Joi.string()
@@ -35,4 +36,4 @@ const config = {
   }
 };
 
-module.exports = config;
+export default config;

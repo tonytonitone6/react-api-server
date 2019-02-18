@@ -1,10 +1,10 @@
 'use strict';
 
-const appRoot = require('app-root-path');
-const logger = require(appRoot + '/common/services/logger');
-const errorMessages = require(appRoot + '/config/errorCodes.json');
+import logger from 'common/services/logger';
+import * as errorMessages from 'config/errorCodes.json';
 
-module.exports = class Response {
+
+export default class Response {
   constructor(ctx) {
     this._res = ctx;
     this._status = 200;

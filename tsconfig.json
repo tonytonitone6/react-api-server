@@ -1,12 +1,19 @@
 {
   "compilerOptions": {
-  "module": "commonjs",
-  "target": "es2017",        
-  "noImplicitAny": false,
-  "sourceMap": false,
-  "rootDir":"./",
-  "outDir":"./build",
-  "watch":true
+    "module": "commonjs",
+    "target": "es2017",        
+    "noImplicitAny": false,
+    "sourceMap": false,
+    // "rootDir":"./",
+    "resolveJsonModule": true,
+    "baseUrl": "src",
+    "outDir":"./build",
+    "watch":true,
+    "paths": {
+      "models/*": ["common/models/*"],
+      "services/*": ["common/services/*"],
+      "config/*": ["config/*"]
+    }
 },
   "include":[
     "./src/**/*"
