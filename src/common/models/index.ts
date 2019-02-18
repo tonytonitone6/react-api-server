@@ -1,15 +1,13 @@
-'use strict';
-
-const mongoose = require('mongoose');
-const fs = require('fs');
-const config = require('../../config/config');
-const path = require('path');
-const logger = require('../services/logger');
+import * as mongoose from 'mongoose';
+import * as fs from 'fs';
+import config from '../../config/config';
+import * as path from 'path';
+import logger from '../services/logger';
 const dir = path.join(__dirname, 'schemas');
 
-mongoose.Promise = global.Promise;
+(<any>mongoose).Promise = global.Promise;
 
-module.exports = {
+export default {
   init: function() {
     return new Promise((resolve, reject) => {
       mongoose.connect(config.mongo.host, err => {
