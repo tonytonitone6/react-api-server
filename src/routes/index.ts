@@ -1,6 +1,6 @@
 import * as Router from 'koa-router';
 const router = new Router({ prefix: '/v1' });
-const LoginController = require('./controllers/Login');
+import LoginController from './controllers/Account';
 
 
 router.post('/userSignup', LoginController.create);

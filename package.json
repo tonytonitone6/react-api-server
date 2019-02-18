@@ -4,7 +4,12 @@
   "description": "api-server",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "watch-server": "nodemon --watch 'src/**/*' -e ts,tsx --exec 'ts-node' ./src/server.ts"
+=======
+    "test": "jest",
+    "dev": "nodemon server.js"
+>>>>>>> c0840409e3fff75f6f529d539d73af38ec18cc94
   },
   "repository": {
     "type": "git",
@@ -21,10 +26,14 @@
     "bcrypt": "^3.0.3",
     "dotenv": "^6.2.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "jest": "^23.6.0",
 =======
     "jest": "^24.0.0",
 >>>>>>> master
+=======
+    "jest": "^24.0.0",
+>>>>>>> c0840409e3fff75f6f529d539d73af38ec18cc94
     "joi": "^14.3.1",
     "jsonwebtoken": "^8.4.0",
     "koa": "^2.6.2",
@@ -38,9 +47,13 @@
     "passport-local": "^1.0.0",
 <<<<<<< HEAD
     "redis": "^2.8.0",
+<<<<<<< HEAD
 =======
     "supertest": "^3.4.2",
 >>>>>>> master
+=======
+    "supertest": "^3.4.2",
+>>>>>>> c0840409e3fff75f6f529d539d73af38ec18cc94
     "winston": "^3.1.0"
   },
   "devDependencies": {

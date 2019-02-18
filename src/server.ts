@@ -13,13 +13,12 @@ app.use(koaLogger());
 
 
 
-console.log(models);
 
-// models.init()
-//   .then(() => {
+models.init()
+  .then(() => {
 
-//     // app.use(router.routes()).use(router.allowedMethods());
-//   });
+    // app.use(router.routes()).use(router.allowedMethods());
+  });
 
 app.use(async (ctx, next) => {
   try {
