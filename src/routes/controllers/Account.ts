@@ -1,13 +1,17 @@
-import models from 'models/index';
+'use strict';
+
+import models from '../../common/models';
 import jwt from 'jsonwebtoken';
+import { BaseContext } from 'koa';
+
 const Account = models.get('Account');
 
 const generateToken = (data) => {
   return jwt.sign({sub: data._id}, process.env.JWT_SECRET, { expiresIn: '1d' });
 }
 
-export default {
-  get: async (ctx) => {
+export default class AccountController {
+  public static async get(ctx: BaseContext) {
     const account = await Account.find({});
     ctx.body = { account }
   }

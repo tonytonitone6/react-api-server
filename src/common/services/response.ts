@@ -1,11 +1,16 @@
 'use strict';
 
-import logger from 'common/services/logger';
-import * as errorMessages from 'config/errorCodes.json';
-
+import logger from './logger';
+import * as errorMessages from '../../config/errorCodes.json';
+import { BaseContext } from 'koa';
 
 export default class Response {
-  constructor(ctx) {
+
+  _res: any;
+  _status: number;
+  _template: any;
+
+  constructor(ctx: BaseContext) {
     this._res = ctx;
     this._status = 200;
     this._template = {
@@ -18,12 +23,12 @@ export default class Response {
     };
   }
 
-  status(status) {
+  status(status: number) {
     this._status = status;
     return this._status;
   }
 
-  errorCode(code) {
+  errorCode(code: number) {
     this._template.isSuccess = false;
     const errorMessage = errorMessages[code] || '';
     this._template.error.code = code;
@@ -31,12 +36,12 @@ export default class Response {
     return this;
   }
 
-  data(data) {
+  data(data: any) {
     this._template.result = data;
     return this;
   }
 
-  throw(code, message) {
+  throw(code: number, message: string) {
     this._template.error.code = code;
     this._template.error.message = message;
     return this._res.throw(this._template);

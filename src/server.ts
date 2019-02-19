@@ -1,9 +1,8 @@
 import * as Koa from "koa";
-import * as bodyParser from "koa-body-parser";
+import * as bodyParser from "koa-bodyparser";
 import * as koaLogger from "koa-logger";
 import models from "./common/models";
 import logger from "./common/services/logger";
-// import router from "./routes";
 
 const app: Koa = new Koa();
 const PORT = process.env.PORT || 5000;
@@ -16,8 +15,10 @@ app.use(koaLogger());
 
 models.init()
   .then(() => {
-
-    // app.use(router.routes()).use(router.allowedMethods());
+    import('./routes')
+      .then(({router}) => {
+        app.use(router.routes()).use(router.allowedMethods());
+      })
   });
 
 app.use(async (ctx, next) => {

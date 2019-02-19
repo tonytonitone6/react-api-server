@@ -1,8 +1,15 @@
 import * as mongoose from 'mongoose';
-import _ from 'lodash';
 import * as moment from 'moment';
-import bcrypt from 'bcrypt';
+import * as _ from 'lodash';
+import * as bcrypt from 'bcrypt';
 const { Schema } = mongoose;
+
+interface valid{
+  name: string;
+  email: string;
+  password: string;
+  createTime: Date
+}
 
 
 const schema = new Schema({
@@ -24,20 +31,20 @@ const schema = new Schema({
 schema.pre('save', function(next) {
   const user = this;
 
-  bcrypt.genSalt(10, function(err, salt) {
+  bcrypt.genSalt(10, function(err: any, salt: any) {
     if (err) return next(err);
 
-    bcrypt.hash(user.password, salt, function(err, hash) {
-      if (err) return next(err);
-      user.password = hash;
-      next();
-    })
+    // bcrypt.hash(user.password, salt, function(err, hash) {
+    //   if (err) return next(err);
+    //   user.password = hash;
+    //   next();
+    // })
   })
 });
 
-schema.methods.comparePassword = (password, userPassword) => {
+schema.methods.comparePassword = (password: string, userPassword: string) => {
   return new Promise((resolve, reject) => {
-    bcrypt.compare(password, userPassword, (err, isMatch) => {
+    bcrypt.compare(password, userPassword, (err: any, isMatch: any) => {
       isMatch ? resolve({success: true}) : reject({success: false, errMsg: 'password is failure'});
     });
   });
