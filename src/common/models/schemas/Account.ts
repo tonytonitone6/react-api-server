@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 import * as moment from 'moment';
 import * as _ from 'lodash';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt-nodejs';
 const { Schema } = mongoose;
 
 interface valid{
@@ -28,27 +28,17 @@ const schema = new Schema({
   }
 });
 
-schema.pre('save', function(next) {
-  const user = this;
+type comparePasswordFunction = (password: string, cb: (err: any, isMatch: any) => {}) => void;
 
-  bcrypt.genSalt(10, function(err: any, salt: any) {
-    if (err) return next(err);
-
-    // bcrypt.hash(user.password, salt, function(err, hash) {
-    //   if (err) return next(err);
-    //   user.password = hash;
-    //   next();
-    // })
+const comparePassword: comparePasswordFunction = function(password, cb) {
+  bcrypt.compare(password, this.password, (err: mongoose.Error, isMatch: boolean) => {
+    cb(err, isMatch);
   })
-});
+}
 
-schema.methods.comparePassword = (password: string, userPassword: string) => {
-  return new Promise((resolve, reject) => {
-    bcrypt.compare(password, userPassword, (err: any, isMatch: any) => {
-      isMatch ? resolve({success: true}) : reject({success: false, errMsg: 'password is failure'});
-    });
-  });
-};
+schema.methods.comparePassword = comparePassword;
+
+
 
 const model = mongoose.model('Account', schema, 'accounts');
 
