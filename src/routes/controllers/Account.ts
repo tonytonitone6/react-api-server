@@ -1,7 +1,7 @@
 'use strict';
 
 import models from '../../common/models';
-import jwt from 'jsonwebtoken';
+import * as jwt from 'jsonwebtoken';
 import { BaseContext } from 'koa';
 
 const Account = models.get('Account');

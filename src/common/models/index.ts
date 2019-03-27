@@ -7,16 +7,24 @@ const dir = path.join(__dirname, 'schemas');
 
 (<any>mongoose).Promise = global.Promise;
 
+
+const option = {
+  useNewUrlParser: true,
+  autoReconnect: true,
+  reconnectInterval: 1000
+};
+
 export default {
   init: function() {
     return new Promise((resolve, reject) => {
-      mongoose.connect(config.mongo.host, err => {
-        if (err) {
-          logger.error(err);
-          mongoose.disconnect();
-          process.exit(1);
-        }
-      });
+      // mongoose.connect(config.mongo.host, (err) => {
+      //   if (err) {
+      //     logger.error(err);
+      //     mongoose.disconnect();
+      //     process.exit(1);
+      //   }
+      // });
+      mongoose.connect(config.mongo.host, option);
       mongoose.connection
         .on('error', err => {
           logger.error(err);
