@@ -4,6 +4,8 @@ import Response from '../../common/services/response';
 const userAuth = async (ctx, next) => {
   return passport.authenticate('signinAuth', { session: false }, async (err, user, info) => {
     try {
+      if (!user) throw(info);
+      ctx.request.id = user._id;
       await next();
     } catch (err) {
       return new Response(ctx)

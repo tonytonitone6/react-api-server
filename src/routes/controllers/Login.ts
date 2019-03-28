@@ -2,6 +2,8 @@
 
 import { BaseContext } from 'koa';
 import * as jwt from 'jsonwebtoken';
+import * as bcrypt from 'bcrypt-nodejs';
+
 import models from '../../common/models';
 import Response from '../../common/services/response';
 const Account = models.get('Account');
@@ -48,20 +50,7 @@ export default class Create  {
       email,
       password
     } = ctx.request.body;
+    
 
-    if (!email && !password) {
-      return new Response(ctx)
-        .errorCode(822)
-        .send();
-    }
-
-    const user = await Account.findOne({email});
-    const token = await generateToken.call(this, user);
-
-    return new Response(ctx)
-      .data({auth: true, token})
-      .send();
   }
-
-
 }

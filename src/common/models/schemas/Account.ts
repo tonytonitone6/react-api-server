@@ -1,18 +1,18 @@
 import { Document, model, Model, Schema, Error } from 'mongoose';
-// import * as mongoose from 'mongoose';
 import * as _ from 'lodash';
 import * as bcrypt from 'bcrypt-nodejs';
 
-// export type UserModel = Document & {
-//   name: string,
-//   email: string,
-//   password: string,
-//   createdAt: Date,
-//   comparePassword: comparePasswordFunction
-// };
+export type UserModel = Document & {
+  name: string,
+  email: string,
+  password: string,
+  createdAt: Date,
+  comparePassword: comparePasswordFunction
+};
+
 
 // issue password is any
-interface IUser extends Document {
+export interface IUser extends Document {
   name: string;
   email: string;
   password: any;
