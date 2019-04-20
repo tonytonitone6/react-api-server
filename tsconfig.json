@@ -8,7 +8,8 @@
     "moduleResolution": "node",
     "baseUrl": "./src",
     "outDir":"./build",
-    "watch": false
+    "watch": false,
+    "experimentalDecorators": true
 },
   "include":[
     "src/**/*"

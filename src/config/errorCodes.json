@@ -4,6 +4,7 @@
   "421": "Lost parameters",
   "422": "Missing parameter",
   "450": "Account is exist",
+  "501": "Token is expired",
   "822": "email or password are errors"
 }
 

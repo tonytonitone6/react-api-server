@@ -17,6 +17,7 @@ const loginAuth = new LocalStrategy({
     }
     user.comparePassword(password, (err: Error, isMatch: boolean) => {
       if (err) { return done(err); }
+      console.log(isMatch, 'match');
       if (isMatch) {
         return done(undefined, user);
       }

@@ -5,7 +5,7 @@ const userAuth = async (ctx, next) => {
   return passport.authenticate('signinAuth', { session: false }, async (err, user, info) => {
     try {
       if (!user) throw(info);
-      ctx.request.id = user._id;
+      ctx.request.user = user;
       await next();
     } catch (err) {
       return new Response(ctx)

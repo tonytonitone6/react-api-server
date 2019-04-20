@@ -1,17 +1,25 @@
 'use strict';
-import * as jwt from 'jsonwebtoken';
-import * as util from 'util';
-import { BaseContext } from 'koa';
-import models from '../../common/models';
 
-const verify = util.promisify(jwt.verify);
+import { BaseContext } from 'koa';
+
+import models from '../../common/models';
+import Response from '../../common/services/response';
+
 const Account = models.get('Account');
 
 
 export default class AccountController {
+
   public static async get(ctx: BaseContext) {
-    const { authorization } = ctx.request.headers;
-    const res = await verify(authorization , process.env.JWT_SECRET);
-    console.log(res);
+    try {
+      const user = await Account.find({}).lean();
+      const userData = [
+        ...user
+      ];
+      return new Response(ctx)
+        .data(userData)
+        .send();
+    } catch (error) {
+    }
   }
 }

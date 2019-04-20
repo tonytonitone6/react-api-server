@@ -1,16 +1,19 @@
 'use strict';
 
 import { BaseContext } from 'koa';
-import * as jwt from 'jsonwebtoken';
-import * as bcrypt from 'bcrypt-nodejs';
+import { sign, SignOptions, Secret } from 'jsonwebtoken';
+import * as util from 'util';
 
 import models from '../../common/models';
 import Response from '../../common/services/response';
 const Account = models.get('Account');
 
-const generateToken = data => {
-  return jwt.sign({sub: data._id}, process.env.JWT_SECRET, { expiresIn: '1d' });
-};
+const jwtSign = util.promisify(sign) as (
+    payload: string | Buffer | object,
+    secretOrPrivateKey: Secret,
+    options: SignOptions
+  ) => Promise<string>;
+
 
 export default class Create  {
   public static async create(ctx: BaseContext) {
@@ -46,11 +49,11 @@ export default class Create  {
   }
 
   public static async get(ctx: BaseContext) {
-    const {
-      email,
-      password
-    } = ctx.request.body;
-    
+    const { user } = ctx.request;
+    const token = await jwtSign({sub: user._id}, process.env.JWT_SECRET, { expiresIn: '1d' });
 
+    return new Response(ctx)
+      .data(token)
+      .send();
   }
 }
