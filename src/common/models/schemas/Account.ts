@@ -15,7 +15,8 @@ export type UserModel = Document & {
 export interface IUser extends Document {
   name: string;
   email: string;
-  password: any;
+  password: string;
+  avatar: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -29,6 +30,9 @@ const schema: Schema = new Schema({
     lowercase: true
   },
   password: {
+    type: String
+  },
+  avatar: {
     type: String
   },
   createdAt: {

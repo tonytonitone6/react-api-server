@@ -16,7 +16,7 @@ const jwtSign = util.promisify(sign) as (
 
 
 export default class Create  {
-  public static async create(ctx: BaseContext) {
+  public static async create(ctx: BaseContext): Promise<{Response}> {
     const { email, password, name } = ctx.request.body;
     const dataField = Object.values({
       email,
