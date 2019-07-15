@@ -15,16 +15,29 @@ const jwtSign = util.promisify(sign) as (
   ) => Promise<string>;
 
 
-export default class Create  {
+interface ISigninStatus {
+  user: {
+    _id: () => string;
+  };
+}
+
+interface ISigninData {
+  email: string;
+  password: string;
+  name: string;
+}
+
+
+export default class LoginController  {
   public static async create(ctx: BaseContext): Promise<{Response}> {
-    const { email, password, name } = ctx.request.body;
+    const { email, password, name }: ISigninData = ctx.request.body;
     const dataField = Object.values({
       email,
       password,
       name
     });
 
-    if (dataField.includes('undefined')) {
+    if (dataField.includes("undefined")) {
       return new Response(ctx)
         .errorCode(421)
         .send();
@@ -42,6 +55,7 @@ export default class Create  {
         password,
         name
       });
+      console.log(createAccount, "signin");
       return new Response(ctx)
         .data(createAccount)
         .send();
@@ -49,11 +63,15 @@ export default class Create  {
   }
 
   public static async get(ctx: BaseContext) {
-    const { user } = ctx.request;
-    const token = await jwtSign({sub: user._id}, process.env.JWT_SECRET, { expiresIn: '1d' });
+    const { user: { _id } }: ISigninStatus = ctx.request;
+    const token = await jwtSign({sub: _id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+    const res = {
+      _id,
+      token
+    };
 
     return new Response(ctx)
-      .data(token)
+      .data(res)
       .send();
   }
 }

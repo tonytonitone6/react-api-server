@@ -10,9 +10,9 @@ router.post('/userSignup', controller.login.create);
 router.get('/userStatus', controller.userStatus.get);
 
 // account info
-router.get('/getAccountList', controller.accounts.list);
-router.get('/getUser', authToken, controller.accounts.get);
-router.delete('/deleteAccount', controller.accounts.delete);
+router.get("/getAccountList", controller.accounts.list);
+router.get("/getUser", authToken, controller.accounts.get);
+router.delete("/deleteAccount", controller.accounts.delete);
 
 export {
   router

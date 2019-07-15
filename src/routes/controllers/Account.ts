@@ -1,14 +1,18 @@
-'use strict';
+"use strict";
 
-import { BaseContext } from 'koa';
+import { BaseContext } from "koa";
 
-import models from '../../common/models';
-import Response from '../../common/services/response';
-const Account = models.get('Account');
+import models from "../../common/models";
+import Response from "../../common/services/response";
+const Account = models.get("Account");
 
-interface userQuery {
+interface UserQuery {
   userName?: string;
   email?: string;
+}
+
+interface OptionDelete {
+  _id: string;
 }
 
 
@@ -28,12 +32,12 @@ export default class AccountController {
   }
 
   public static async get(ctx: BaseContext) {
-    const condition: userQuery = ctx.query;
-    const queryOption: userQuery = Object
+    const condition: UserQuery = ctx.query;
+    const queryOption: UserQuery = Object
       .keys(condition)
-      .filter(item => condition[item] !== '')
+      .filter(item => condition[item] !== "")
       .reduce((item, key) => {
-        item[`${key === 'userName' ? 'name' : key}`] = condition[key];
+        item[`${key === "userName" ? "name" : key}`] = condition[key];
         return item;
       }, {});
     try {
@@ -47,6 +51,16 @@ export default class AccountController {
   }
 
   public static async delete(ctx: BaseContext) {
-    
+    const { _id }: OptionDelete = ctx.query;
+    const res = await Account.findOne({
+      _id
+    }).lean();
+
+    // await res.updated({
+    //   updatedBy: 
+    // })
+
+    console.log(res);
+
   }
 }

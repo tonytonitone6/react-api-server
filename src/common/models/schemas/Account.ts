@@ -1,6 +1,7 @@
 import { Document, model, Model, Schema, Error } from 'mongoose';
 import * as _ from 'lodash';
 import * as bcrypt from 'bcrypt-nodejs';
+import { string } from 'joi';
 
 export type UserModel = Document & {
   name: string,
@@ -42,6 +43,9 @@ const schema: Schema = new Schema({
   updatedAt: {
     type: Date,
     default: Date.now
+  },
+  updateBy: {
+    type: String
   }
 }, { timestamps: true });
 

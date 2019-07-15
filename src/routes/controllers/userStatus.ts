@@ -1,9 +1,9 @@
-'use strict';
-import { verify, VerifyOptions } from 'jsonwebtoken';
-import * as util from 'util';
-import { BaseContext } from 'koa';
-import models from '../../common/models';
-import Response from '../../common/services/response';
+"use strict";
+import { verify, VerifyOptions } from "jsonwebtoken";
+import * as util from "util";
+import { BaseContext } from "koa";
+import models from "../../common/models";
+import Response from "../../common/services/response";
 
 const jwtVerify = util.promisify(verify) as (
   token: string,
