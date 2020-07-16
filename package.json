@@ -28,7 +28,7 @@
     "koa-passport": "^4.1.1",
     "koa-router": "^7.4.0",
     "koa2-cors": "^2.0.6",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "moment": "^2.23.0",
     "mongoose": "^5.4.4",
     "passport-local": "^1.0.0",
